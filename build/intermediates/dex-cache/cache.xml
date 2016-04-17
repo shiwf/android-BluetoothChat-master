@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\beleive\android-BluetoothChat-master\android-BluetoothChat-master\Application\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-30f753fa41b850708a13d71f7d1614d9bac87190.jar" />
+    </item>
+    <item
+        jar="C:\beleive\android-BluetoothChat-master\android-BluetoothChat-master\Application\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\beleive\android-BluetoothChat-master\android-BluetoothChat-master\Application\build\intermediates\pre-dexed\debug\classes-cab4bd5a22932549ea95e26d8c8cdd360c6c1d37.jar" />
+    </item>
+    <item
+        jar="C:\beleive\android-BluetoothChat-master\android-BluetoothChat-master\Application\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\beleive\android-BluetoothChat-master\android-BluetoothChat-master\Application\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-d0979b08d3b4450c9df63a51da6bab41bde2d2bb.jar" />
+    </item>
+
+</items>
