@@ -47,11 +47,12 @@ public class BluetoothScanService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mNewDevicesArrayList.clear();
+        mBluetoothChatService = new BluetoothChatService(this, mHandler);
        mBluetoothAdapter.startDiscovery();
-        if (mBluetoothChatService.getState() == BluetoothChatService.STATE_NONE) {
+        //if (mBluetoothChatService.getState() == BluetoothChatService.STATE_NONE) {
             // Start the Bluetooth chat services
            // mBluetoothChatService.start();
-        }
+       // }
         return super.onStartCommand(intent, flags, startId);
     }
     private void registerReceiverForIntentFilter(){
@@ -75,8 +76,10 @@ public class BluetoothScanService extends Service {
                 //ParcelUuid [] uudi =device.getUuids();
                 //device.fetchUuidsWithSdp();
                 // If it's already paired, skip it, because it's been listed already
-                if(device.getAddress().contains("80:6C")){
-                    //mBluetoothChatService.connect(device,true);
+                if(device.getAddress().contains("00:06:66:76:A0:AD")){
+                    mBluetoothAdapter.cancelDiscovery();
+                    mBluetoothChatService.connect(device,false);
+
                 }
                 //if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     mNewDevicesArrayList.add(device.getName() + "\n" + device.getAddress());
@@ -125,6 +128,7 @@ public class BluetoothScanService extends Service {
 
                         Toast.makeText(BluetoothScanService.this, msg.getData().getString(Constants.TOAST),
                                 Toast.LENGTH_SHORT).show();
+                    mBluetoothAdapter.startDiscovery();
                         //startScanService();
 
                     break;

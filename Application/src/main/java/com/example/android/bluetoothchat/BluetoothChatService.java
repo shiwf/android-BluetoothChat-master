@@ -47,10 +47,15 @@ public class BluetoothChatService {
     private static final String NAME_INSECURE = "BluetoothChatInsecure";
 
     // Unique UUID for this application
-    private static final UUID MY_UUID_SECURE =
+    //00001101-0000-1000-8000-00805F9B34FB
+    /*private static final UUID MY_UUID_SECURE =
             UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
     private static final UUID MY_UUID_INSECURE =
-            UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+            UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");*/
+    private static final UUID MY_UUID_SECURE =
+            UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID MY_UUID_INSECURE =
+            UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // Member fields
     private final BluetoothAdapter mAdapter;
@@ -264,7 +269,7 @@ public class BluetoothChatService {
         mHandler.sendMessage(msg);
 
         // Start the service over to restart listening mode
-        BluetoothChatService.this.start();
+        //BluetoothChatService.this.start();
     }
 
     /**
@@ -279,7 +284,7 @@ public class BluetoothChatService {
         mHandler.sendMessage(msg);
 
         // Start the service over to restart listening mode
-        BluetoothChatService.this.start();
+        //BluetoothChatService.this.start();
     }
 
     /**
@@ -385,6 +390,7 @@ public class BluetoothChatService {
             // Get a BluetoothSocket for a connection with the
             // given BluetoothDevice
             try {
+                // will open BluetoothSocket on device which want to connect
                 if (secure) {
                     tmp = device.createRfcommSocketToServiceRecord(
                             MY_UUID_SECURE);
@@ -485,7 +491,7 @@ public class BluetoothChatService {
                     Log.e(TAG, "disconnected", e);
                     connectionLost();
                     // Start the service over to restart listening mode
-                    BluetoothChatService.this.start();
+                   // BluetoothChatService.this.start();
                     break;
                 }
             }
@@ -514,6 +520,19 @@ public class BluetoothChatService {
             } catch (IOException e) {
                 Log.e(TAG, "close() of connect socket failed", e);
             }
+        }
+    }
+    public void send(String s, OutputStream outputStream){
+        byte[] msgBuffer = s.getBytes();
+        try {
+            outputStream.write(msgBuffer);
+        } catch (IOException e) {
+            String msg = "In onResume() and an exception occurred during write: " + e.getMessage();
+            /*if (address.equals("00:00:00:00:00:00"))
+                msg = msg + ".\n\nUpdate your server address from 00:00:00:00:00:00 to the correct address on line 37 in the java code";
+            msg = msg +  ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + " exists on server.\n\n";
+
+            errorExit("Fatal Error", msg); */
         }
     }
 }

@@ -99,6 +99,7 @@ public class BluetoothChatFragment extends Fragment {
             Toast.makeText(activity, "Bluetooth is not available", Toast.LENGTH_LONG).show();
             activity.finish();
         }
+        startScanService();
     }
     public Handler getHandler(){
         return mHandler;
@@ -122,7 +123,7 @@ public class BluetoothChatFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (mChatService != null) {
-            mChatService.stop();
+            //mChatService.stop();
         }
     }
 
@@ -137,7 +138,7 @@ public class BluetoothChatFragment extends Fragment {
             // Only if the state is STATE_NONE, do we know that we haven't started already
             if (mChatService.getState() == BluetoothChatService.STATE_NONE) {
                 // Start the Bluetooth chat services
-                mChatService.start();
+                //mChatService.start();
             }
         }
     }
@@ -330,7 +331,7 @@ public class BluetoothChatFragment extends Fragment {
     };
     private void startScanService(){
         Intent intent = new Intent(getActivity(), BluetoothScanService.class);
-        //getActivity().startService(intent);
+        getActivity().startService(intent);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {

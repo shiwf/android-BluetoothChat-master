@@ -25,6 +25,8 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -50,6 +52,10 @@
             android:theme="@android:style/Theme.Holo.Dialog"/>
         <service android:name=".BluetoothScanService"/>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d9636290707162d26bb8ff6913bed269e9f99cbe" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

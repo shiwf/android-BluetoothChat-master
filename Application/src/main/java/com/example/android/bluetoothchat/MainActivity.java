@@ -24,11 +24,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ViewAnimator;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.android.common.activities.SampleActivityBase;
 import com.example.android.common.logger.Log;
 import com.example.android.common.logger.LogFragment;
 import com.example.android.common.logger.LogWrapper;
 import com.example.android.common.logger.MessageOnlyLogFilter;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -51,6 +53,7 @@ public class MainActivity extends SampleActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         instance = this;
         if (savedInstanceState == null) {

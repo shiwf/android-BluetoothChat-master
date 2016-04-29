@@ -2,23 +2,30 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 repositories {
     jcenter()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 dependencies {
     compile "com.android.support:support-v4:22.2.1"
     //compile "com.android.support:gridlayout-v7:23.1.0"
     //compile "com.android.support:cardview-v7:23.1.0"
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
 }
 
 // The sample build uses multiple directories to
