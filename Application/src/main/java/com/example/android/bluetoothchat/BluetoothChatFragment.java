@@ -212,7 +212,7 @@ public class BluetoothChatFragment extends Fragment {
         // Check that we're actually connected before trying anything
         if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
             Toast.makeText(getActivity(), R.string.not_connected, Toast.LENGTH_SHORT).show();
-            return;
+            //return;
         }
 
         // Check that there's actually something to send

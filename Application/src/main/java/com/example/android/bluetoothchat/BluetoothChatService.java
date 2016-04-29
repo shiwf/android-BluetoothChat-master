@@ -71,7 +71,7 @@ public class BluetoothChatService {
     public static final int STATE_LISTEN = 1;     // now listening for incoming connections
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
-
+    private OutputStream outStream = null;
     /**
      * Constructor. Prepares a new BluetoothChat session.
      *
@@ -247,14 +247,15 @@ public class BluetoothChatService {
      */
     public void write(byte[] out) {
         // Create temporary object
-        ConnectedThread r;
+       /* ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
         synchronized (this) {
-            if (mState != STATE_CONNECTED) return;
+            //if (mState != STATE_CONNECTED) return;
             r = mConnectedThread;
         }
         // Perform the write unsynchronized
-        r.write(out);
+        r.write(out); */
+        sendData(out);
     }
 
     /**
@@ -427,10 +428,16 @@ public class BluetoothChatService {
                 connectionFailed();
                 return;
             }
+            try {
+                outStream = mmSocket.getOutputStream();
+            } catch (IOException e) {
+                //errorExit("Fatal Error", "In onResume() and output stream creation failed:" + e.getMessage() + ".");
+            }
+
 
             // Reset the ConnectThread because we're done
             synchronized (BluetoothChatService.this) {
-                mConnectThread = null;
+                //mConnectThread = null;
             }
 
             // Start the connected thread
@@ -502,17 +509,18 @@ public class BluetoothChatService {
          *
          * @param buffer The bytes to write
          */
-        public void write(byte[] buffer) {
-            try {
+       /* public void write(byte[] buffer) {
+            Log.d("tag","b:"+buffer.toString());
+           try {
                 mmOutStream.write(buffer);
 
                 // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(Constants.MESSAGE_WRITE, -1, -1, buffer)
-                        .sendToTarget();
+                //mHandler.obtainMessage(Constants.MESSAGE_WRITE, -1, -1, buffer)
+                      //  .sendToTarget();
             } catch (IOException e) {
                 Log.e(TAG, "Exception during write", e);
             }
-        }
+        } */
 
         public void cancel() {
             try {
@@ -533,6 +541,18 @@ public class BluetoothChatService {
             msg = msg +  ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + " exists on server.\n\n";
 
             errorExit("Fatal Error", msg); */
+        }
+    }
+    public void sendData(byte[] buffer) {
+        Log.d("tag","b:"+buffer.toString());
+        try {
+            outStream.write(buffer);
+
+            // Share the sent message back to the UI Activity
+            //mHandler.obtainMessage(Constants.MESSAGE_WRITE, -1, -1, buffer)
+            //  .sendToTarget();
+        } catch (IOException e) {
+            Log.e(TAG, "Exception during write", e);
         }
     }
 }
